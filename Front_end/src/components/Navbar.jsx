@@ -4,7 +4,6 @@ import { CiSearch } from "react-icons/ci";
 import { FaMicrophone } from "react-icons/fa";
 import { RiVideoAddLine } from "react-icons/ri";
 import { LuBell } from "react-icons/lu";
-import { FaUser } from "react-icons/fa6";
 import { useState } from "react";
 import { MdOutlineLogout } from "react-icons/md";
 import { MdOutlineLogin } from "react-icons/md";
@@ -102,6 +101,5 @@ const Navbar = () => {
 }
 
 export default Navbar;
-            {/* <FaUser className="text-3xl cursor-pointer"/> */}
 
-//
+
