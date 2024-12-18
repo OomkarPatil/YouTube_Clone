@@ -1,12 +1,19 @@
+import { useState } from "react"
 import Navbar from "./components/Navbar"
 import Home from "./Pages/Home"
 
 
 function App() {
- return (
+  const [sideNavBar, setSideNavBar] = useState(true);
+  
+  const setSideNavBarFunc = (value)=>{
+    setSideNavBar(value)
+  };
+ 
+  return (
     <>
-      <Navbar/>
-      <Home/>
+      <Navbar setSideNavBarFunc={setSideNavBarFunc} sideNavBar={sideNavBar}/>
+      <Home sideNavBar={sideNavBar}/>
     </>
   )
 }

@@ -1,10 +1,10 @@
 import HomePage from '../components/HomePage'
 import SideBar from '../components/SideBar'
 
-const Home = () => {
+const Home = ({sideNavBar}) => {
   return (
     <div className='flex w-full box-border pt-[56px] pb-[0] px-3'>
-        <SideBar />
+        <SideBar  sideNavBar={sideNavBar} />
         <HomePage/>
     </div>
   )

@@ -10,7 +10,7 @@ import { MdOutlineLogin } from "react-icons/md";
 import { MdOutlineSettings } from "react-icons/md";
 
 
-const Navbar = () => {
+const Navbar = ({setSideNavBarFunc, sideNavBar}) => {
 
     const [userProfile, setUserProfile] = useState("https://t3.ftcdn.net/jpg/03/53/11/00/360_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg");
     const [popup, setPopup] = useState(false);
@@ -18,17 +18,22 @@ const Navbar = () => {
         setPopup(prev=>!prev);  
     };
 
+    const handleSidebar =()=>{
+        setSideNavBarFunc(!sideNavBar);
+        console.log(setSideNavBarFunc);
+    }
+
 
   return (
     <div className="h-[57px] box-border py-[7px] px-[14px] flex justify-between items-center w-full top-0 fixed bg-[#141414] z-10">
         
         {/* left side of nav bar*/}
         <div className="gap-[10px] flex justify-center items-center w-fit">
-            <div className="w-10 h-10 flex cursor-pointer justify-center items-center">
-               <IoMenu className="text-white text-2xl"/>
+            <div className="w-10 h-10 flex cursor-pointer justify-center items-center" onClick={handleSidebar}>
+               <IoMenu className="text-white text-2xl" />
             </div>
             <div className="flex justify-center items-center cursor-pointer font-oswald text-[20px] tracking-normal">
-               <FaYoutube className="text-[#FF0000] text-[34px]" />
+               <FaYoutube className="text-[#FF0000] text-[34px] " />
               <div className="text-xl tracking-normal text-white">
                  YouTube<sup className="text-sm font-thin ">IN</sup>
               </div>
