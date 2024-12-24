@@ -1,6 +1,6 @@
 
 import { CgProfile } from "react-icons/cg";
-import { CiCirclePlus } from "react-icons/ci";
+import { CiCirclePlus, CiSearch } from "react-icons/ci";
 import { SlHome } from "react-icons/sl";
 import { SiYoutubeshorts } from "react-icons/si";
 import { MdOutlineSubscriptions } from "react-icons/md";
@@ -17,12 +17,12 @@ const BottomNav = () => {
         {/* Search Icon */}
         <div className="p-2 rounded-full hover:bg-[#383838]">
           <SiYoutubeshorts size={26} />
-          
+         
         </div>
 
         {/* Play Icon */}
         <div className="p-2 rounded-full bg-[#383838] hover:bg-white hover:text-[#383838]">
-          <CiCirclePlus size={26} />
+           <CiSearch  size={26} />
           
         </div>
 

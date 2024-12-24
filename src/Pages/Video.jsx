@@ -10,6 +10,8 @@ import { SiYoutubeshorts } from "react-icons/si";
 
 const Video = () => {
 
+    const[message, setMessage] = useState("");
+
     const [moreOption, setMoreOption] = useState(false);
     const handelMore = ()=>{
         setMoreOption(prev=>!prev);
@@ -122,7 +124,9 @@ const Video = () => {
                  <input 
                    className=" h-10 truncate w-full rounded-[20px] bg-transparent border-none px-3 " 
                    type="text" 
-                   placeholder="comment"
+                   placeholder="Add a comment"
+                   value={message}
+                   onChange={(e) => setMessage(e.target.value)}
                 />
                 <div className='flex gap-2 items-center justify-center'>
                     <div className='flex px-3 py-2 cursor-pointer hover:bg-[#2a2a2a] rounded-full border-[1px] border-[#2a2a2a] justify-center items-center font-medium'>
@@ -282,8 +286,11 @@ const Video = () => {
                     <img 
                         src="/assets(images for texting)/hq720.jpg" 
                         alt="thumbnail" 
-                        className="w-inherit h-full rounded-xl"
+                        className="w-inherit h-full relative rounded-md"
                     />
+                    <div className=" absolute right-[290px] bottom-[125px] py-[2px] text-xs px-[4px] bg-[#00000078] rounded-md">
+                        00:00
+                    </div>
                 </div>
                 {/* description */}
                 <div className='flex flex-col gap-1 leading-tight overflow-hidden text-ellipsis line-clamp-2'>

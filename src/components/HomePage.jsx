@@ -1,4 +1,5 @@
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 
 const HomePage = ({sideNavBar}) => {
@@ -7,7 +8,7 @@ const HomePage = ({sideNavBar}) => {
   const Filter = ["All","Treanding","Music","UI/Ux","Live","Skills","Manga","Cars","Trading","Stocks","News","Education","Coding",];
 
   return (
-    <div className="flex flex-col overflow-x-hidden  flex-1">
+    <div className="flex flex-col overflow-x-hidden flex-1">
         <div className="flex fixed z-[1] w-[100%] box-border gap-[2px] px-2 py-1 flex-shrink-0 h-fit overflow-x-scroll scrollbar-none bg-[#141414]">
 
           {/* Conditionally rendering the filters */}
@@ -24,7 +25,7 @@ const HomePage = ({sideNavBar}) => {
 
        {sideNavBar ? 
           <div className="grid box-border gap-6 lg:grid-cols-[395px_395px_395px] sm:grid-cols-[395px] pt-[90px] px-4 pb-[20px]  bg-[#141414]">
-          <div className="flex text-white box-border flex-col h-80 ">
+          <Link to={'/watch/1'}  className="flex text-white box-border flex-col h-80 ">
 
               {/* video box */}
             <div className="w-full relative box-border cursor-pointer h-[228px] ">
@@ -50,7 +51,7 @@ const HomePage = ({sideNavBar}) => {
               <div className="flex flex-col p-1 pb-3 font-bold box-border w-full ">
                 <div>Title title</div>
                 <div className="text-sm font-semibold pt-1 text-[#bfbcbc]">
-                  <div className="cursor-pointer hover:text-[#e3e0e0] transition duration-200">channel name</div>
+                  <div><Link to={'/user/1'} className="cursor-pointer hover:text-[#e3e0e0] transition duration-200">channel name</Link></div>
                   <span>1.1m Views</span>
                   <span>  • 6 days ago</span>
                 </div>
@@ -62,9 +63,9 @@ const HomePage = ({sideNavBar}) => {
               </div>
             </div>
 
-          </div>
+          </Link>
 
-          <div className="flex text-white box-border flex-col h-80 ">
+          <Link to={'/watch/1'} className="flex text-white box-border flex-col h-80 ">
 
               {/* video box */}
             <div className="w-full relative box-border cursor-pointer h-[228px] ">
@@ -104,9 +105,9 @@ const HomePage = ({sideNavBar}) => {
               
             </div>
 
-          </div>
+          </Link>
 
-          <div className="flex text-white box-border flex-col h-80 ">
+          <Link to={'/watch/1'} className="flex text-white box-border flex-col h-80 ">
 
               {/* video box */}
             <div className="w-full relative box-border cursor-pointer h-[228px] ">
@@ -146,9 +147,9 @@ const HomePage = ({sideNavBar}) => {
               
             </div>
 
-          </div>
+          </Link>
 
-          <div className="flex text-white box-border flex-col h-80 ">
+          <Link to={'/watch/1'} className="flex text-white box-border flex-col h-80 ">
 
               {/* video box */}
             <div className="w-full relative box-border cursor-pointer h-[228px] ">
@@ -188,9 +189,9 @@ const HomePage = ({sideNavBar}) => {
               
             </div>
 
-          </div>
+          </Link>
 
-          <div className="flex text-white box-border flex-col h-80 ">
+          <Link to={'/watch/1'} className="flex text-white box-border flex-col h-80 ">
 
               {/* video box */}
             <div className="w-full relative box-border cursor-pointer h-[228px] ">
@@ -230,11 +231,11 @@ const HomePage = ({sideNavBar}) => {
               
             </div>
 
-          </div>
+          </Link>
         </div>
         :
         <div className="grid box-border gap-[30px] lg:grid-cols-[326px_326px_326px_326px] sm:grid-cols-[395px]  pt-[90px] px-4 pb-[20px]  bg-[#141414]">
-        <div className="flex text-white box-border flex-col h-80 ">
+        <Link to={'/watch/1'} className="flex text-white box-border flex-col h-80 ">
 
             {/* video box */}
           <div className="w-full relative box-border cursor-pointer h-[195px] ">
@@ -272,9 +273,9 @@ const HomePage = ({sideNavBar}) => {
             </div>
           </div>
 
-        </div>
+        </Link>
 
-        <div className="flex text-white box-border flex-col h-80 ">
+        <Link to={'/watch/1'} className="flex text-white box-border flex-col h-80 ">
 
             {/* video box */}
           <div className="w-full relative box-border cursor-pointer h-[195px] ">
@@ -314,9 +315,9 @@ const HomePage = ({sideNavBar}) => {
             
           </div>
 
-        </div>
+        </Link>
 
-        <div className="flex text-white box-border flex-col h-80 ">
+        <Link to={'/watch/1'} className="flex text-white box-border flex-col h-80 ">
 
             {/* video box */}
           <div className="w-full relative box-border cursor-pointer h-[195px] ">
@@ -356,9 +357,9 @@ const HomePage = ({sideNavBar}) => {
             
           </div>
 
-        </div>
+        </Link>
 
-        <div className="flex text-white box-border flex-col h-80 ">
+        <Link to={'/watch/1'} className="flex text-white box-border flex-col h-80 ">
 
             {/* video box */}
           <div className="w-full relative box-border cursor-pointer h-[195px] ">
@@ -398,9 +399,9 @@ const HomePage = ({sideNavBar}) => {
             
           </div>
 
-        </div>
+        </Link>
 
-        <div className="flex text-white box-border flex-col h-80 ">
+        <Link to={'/watch/1'} className="flex text-white box-border flex-col h-80 ">
 
             {/* video box */}
           <div className="w-full relative box-border cursor-pointer h-[195px] ">
@@ -440,7 +441,7 @@ const HomePage = ({sideNavBar}) => {
             
           </div>
 
-        </div>
+        </Link>
       </div>}
 
 

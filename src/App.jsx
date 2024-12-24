@@ -4,6 +4,11 @@ import Home from "./Pages/Home"
 import BottomNav from "./components/BottomNav";
 import { Route, Routes } from "react-router-dom";
 import Video from "./Pages/Video";
+import Profile from "./Pages/Profile";
+import UploadPage from "./Pages/UploadPage";
+import Register from "./Pages/Register";
+
+import Login from "./Pages/Login";
 
 
 function App() {
@@ -19,6 +24,10 @@ function App() {
       <Routes>
         <Route path="/" element={ <Home sideNavBar={sideNavBar}/>}/>
         <Route path="/watch/:id" element={ <Video/> }/>
+        <Route path="/user/:id" element={ <Profile sideNavBar={sideNavBar}/> }/>
+        <Route path="/:id/upload" element={ <UploadPage/> }/>
+        <Route path="/register" element={ <Register/> }/>
+        <Route path="/login" element={ <Login/> }/>
       </Routes>
       <div className="md:hidden fixed bottom-0 left-0 w-full">
         <BottomNav />
@@ -27,4 +36,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

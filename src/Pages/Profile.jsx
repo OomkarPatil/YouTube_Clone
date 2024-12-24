@@ -1,11 +1,10 @@
-
-import HomePage from '../components/HomePage'
+import React from 'react'
+import Profilepage from '../components/Profilepage'
 import SideBar from '../components/SideBar'
-import Profile from './Profile';
 
-const Home = ({sideNavBar}) => {
+const Profile = ({sideNavBar}) => {
   return (
-      <div className="flex h-screen">
+    <div className="flex h-screen">
     {/* Sidebar for larger screens */}
     <aside className={`${sideNavBar ? 'w-[250px]' : 'w-20'} hidden md:block transition-width duration-300`}>
       <SideBar sideNavBar={sideNavBar} />
@@ -13,11 +12,10 @@ const Home = ({sideNavBar}) => {
 
     {/* Main content area */}
     <main className="mt-[57px] p-0 flex-1 overflow-auto">
-      <HomePage sideNavBar={sideNavBar}/>
+      <Profilepage sideNavBar={sideNavBar}/>
     </main>
    </div>
   )
 }
 
-export default Home;
-
+export default Profile
