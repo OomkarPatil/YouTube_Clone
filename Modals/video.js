@@ -37,4 +37,6 @@ const videoSchema = new mongoose.Schema({
 
 },{timestamps:true});    //help to add the filen created at and updated at time 
 
-module.exports = mongoose.model('video',videoSchema);
+module.exports = mongoose.model('video',videoSchema);   //creating the model for the video schema
+
+

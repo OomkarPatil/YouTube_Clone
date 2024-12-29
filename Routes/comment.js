@@ -5,5 +5,6 @@ const Auth = require('../Middleware/Authentication.js');
 
 router.post('/comment', Auth, CmtCTRL.AddCmt);
 router.get('/comment/:videoid',CmtCTRL.getCmtByVidID);
+router.put("/comment/:id",CmtCTRL.updateComment);
 
 module.exports = router;

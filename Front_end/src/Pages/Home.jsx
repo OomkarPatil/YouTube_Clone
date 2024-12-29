@@ -12,7 +12,7 @@ const Home = ({sideNavBar}) => {
     </aside>
 
     {/* Main content area */}
-    <main className="mt-[57px] p-0 flex-1 overflow-auto">
+    <main className="mt-[57px] p-0 flex-1 overflow-x-scroll scrollbar-thin scrollbar-thumb-[#4a4949] scrollbar-track-[#141414]  bg-[#141414] ">
       <HomePage sideNavBar={sideNavBar}/>
     </main>
    </div>

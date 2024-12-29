@@ -9,26 +9,38 @@ import { MdOutlineLogout } from "react-icons/md";
 import { MdOutlineLogin } from "react-icons/md";
 import { MdOutlineSettings } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
 
 
 
 const Navbar = ({setSideNavBarFunc, sideNavBar}) => {
 
-    
-    const [popup, setPopup] = useState(false);
-    const [profileImage, setProfileImage] = useState("");
-    const [profileName, setProfileName] = useState("");
+    const[isLoggedIn, setIsLoggedIn] = useState("");
+    const[image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+    const[popup, setPopup] = useState(false);
+    const[profileName, setProfileName] = useState("Username");
+    const[vid, setVid] = useState("");
 
 
     useEffect(() => {
-            // Retrieve the image URL from localStorage
-            const savedImage = localStorage.getItem("profileImage");
-            const savedName = localStorage.getItem("profileName");
-          
-            if (savedName) setProfileName(savedName);
-          if (savedImage) setProfileImage(savedImage);
-      }, []);
-
+        // Retrieve values from localStorage
+        let profileImage = localStorage.getItem("userPrfPic");
+        let profileName = localStorage.getItem("userName");
+        let userId = localStorage.getItem("userId");
+    
+        // Update logged-in status
+        setIsLoggedIn(userId !== null);
+    
+        // Update profile image and name if available
+        if (profileImage) {
+            setImage(profileImage);
+        }
+        if (profileName) {
+            setProfileName(profileName);
+        }
+    }, []);
+    
 
     const handelPopup = ()=>{
         setPopup(prev=>!prev);  
@@ -37,7 +49,8 @@ const Navbar = ({setSideNavBarFunc, sideNavBar}) => {
     const navigate = useNavigate();
 
     const handelProfile = ()=>{
-        navigate('/23/upload');
+        let ID = localStorage.getItem("userId");
+        navigate(`/user/${ID}`);
         setPopup(false);
     }
 
@@ -50,7 +63,40 @@ const Navbar = ({setSideNavBarFunc, sideNavBar}) => {
         setSideNavBarFunc(!sideNavBar);
         console.log(setSideNavBarFunc);
     }
+
+    const handleOut = ()=>{
+        localStorage.clear();
+        getLoggedout();
+
+        setTimeout(()=>{
+            navigate('/');
+            window.location.reload();
+        },1000);
+    }
    
+    const getLoggedout  = async()=>{
+        axios.post("http://localhost:4000/auth/logOut",{},{withCredentials:true}).then((res)=>{
+            console.log(res);
+            toast.success(res.data.message);
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+
+
+
+    const fetchVidById = async () => {
+        await axios.get(`http://localhost:4000/media/vidbyid/${id}`)
+        .then((res) => {     
+            setVid(res.data.video);                   // res.data.video is an object containing the video details
+                // setting the video link from the object
+        }).catch(err => {
+            console.log(err);
+        })  
+    }
+
+
+
 
 
 
@@ -97,7 +143,7 @@ const Navbar = ({setSideNavBarFunc, sideNavBar}) => {
             </div>
             
             <img 
-               src={profileImage} 
+               src={image} 
                alt="ProfilePic" 
                className="w-[30px] h-[30px] rounded-[50%] cursor-pointer mr-3"
                onClick={handelPopup}
@@ -107,32 +153,35 @@ const Navbar = ({setSideNavBarFunc, sideNavBar}) => {
 
             { popup &&
                 <div className="absolute p-1 top-2 -left-12 w-full z-20">
+                    
                     <div className="bg-[#555555] px-2 py-4 rounded-xl gap-1" >
-                    <div className="flex justify-center items-center p-3 cursor-pointer rounded-xl  hover:bg-[#222121]">
-                            <img 
-                                src={profileImage} 
-                                alt="ProfilePic" 
-                                className="w-[30px] rounded-[50%] cursor-pointer mr-2"
-                            />
-                            <div className="px-2">
-                               {profileName ? profileName : "Username"}
-                                <div className="text-[#9796f2] cursor-pointer hover:underline  transition duration-200" onClick={handelProfile}>
-                                    <small>Viewchannel</small>
+                     {isLoggedIn && <div className="flex justify-center items-center p-2 cursor-pointer rounded-xl  hover:bg-[#222121]">
+                                <img 
+                                    src={image} 
+                                    alt="ProfilePic" 
+                                    className="w-[30px] h-[30px] rounded-full cursor-pointer mr-2"
+                                />
+                                <div className="px-2 truncate ">{profileName}
+                                    <div className="text-[#9796f2] cursor-pointer hover:underline truncate transition duration-200" onClick={handelProfile}>
+                                        <small>ViewChannel</small>
+                                    </div>
                                 </div>
-                            </div>
-                    </div>
-                    <div className="p-3 cursor-pointer rounded-2xl hover:bg-[#222121] flex justify-center items-center gap-4"> <MdOutlineSettings />settings</div>
-                    <div
+                        </div> }
+                        
+                     <div className="p-3 cursor-pointer rounded-2xl hover:bg-[#222121] flex justify-center items-center gap-4"> <MdOutlineSettings />settings</div>
+                
+                     {isLoggedIn && <div onClick={handleOut}
                        className="p-3 cursor-pointer rounded-2xl hover:bg-[#222121] flex justify-center items-center gap-4"> 
-                        <MdOutlineLogout /> logout</div>
-                    <div  onClick={handelAuth}
+                        <MdOutlineLogout /> logout</div>}
+                     {!isLoggedIn && <div  onClick={handelAuth}
                        className="p-3 cursor-pointer rounded-2xl hover:bg-[#222121] flex justify-center items-center gap-5">
-                         <MdOutlineLogin />login</div>
-                  </div>
+                         <MdOutlineLogin />login</div>}
+                    </div>
               </div>
             }
-
+          <ToastContainer />
         </div>
+       
     </div>
   );
 }

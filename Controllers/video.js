@@ -1,6 +1,7 @@
 const Vid = require('../Modals/video.js');
 
 
+
 exports.UpldVid = async(req,res)=>{
     try{
 
@@ -16,11 +17,12 @@ exports.UpldVid = async(req,res)=>{
 }
 
 
+
 exports.GetAllVid = async(req,res)=>{
     try{
         const Videos = await Vid.find().populate('user','channelName profilePic userName createdAt');
 
-        res.status(201).json({ success:"true", "videos": Videos })
+        res.status(201).json({ success:"true", "videos": Videos });
     }catch(error){
         res.status(500).json({ error:'server Error!'});
     }
@@ -38,10 +40,11 @@ exports.GetVidByID = async(req,res)=>{
     }
 };
 
-exports.GetAllVideoByUserID = async(req,res)=>{
+exports.GetMEDIAByUserID = async(req,res)=>{
     try{
         let {userId} = req.params;
         const video = await Vid.find({ user:userId }).populate('user','channelName profilePic userName createdAt');
+      
         res.status(201).json({ success:'true', "video": video });
 
     }catch(error){

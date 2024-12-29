@@ -1,93 +1,85 @@
 "use client";
 
-import CardWrapper from "@/components/auth/CardWrapper";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { useState } from "react";
+import { FaYoutube } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
 
-  const FormSchema = z.object({
-    email: z.string().min(2, {
-      message: "Please valid email address.",
-    }),
-    password: z.string().min(6, {
-      message: "password must be at least 6 characters.",
-    }),
-  });
+  const [loginData,setLoginData] = useState({ "email":"", "password": "" });
+  const navigate = useNavigate();
+  const handleOnChng = (event,name) => {
+    setLoginData({...loginData,[name]:event.target.value});
+  }
 
-  const InputForm = () => {
-    const form = useForm({
-      resolver: zodResolver(FormSchema),
-      defaultValues: {
-        email: "",
-        password: "",
-      },
-    });
+  const hndlLogIn = async()=>[
+    axios.post("http://localhost:4000/auth/signIn",loginData,{ withCredentials: true }).then((res=>{
+      console.log(res);
+      localStorage.setItem("token",res.data.token);
+      localStorage.setItem("userId",res.data.user._id);
+      localStorage.setItem("userPrfPic",res.data.user.profilePic);
+      localStorage.setItem("userName",res.data.user.userName);
+      toast.success(res.data.message);   
+      navigate('/'); 
+      setTimeout(()=>{
+        window.location.reload();
+    },250);
+    })).catch(err =>{
+      toast.error("Invalid credentials");
+    })
+  ]
 
-    const onSubmit = (data) => {
-      // Store the data in a variable and log to console
-      const formData = data;
-      console.log("Submitted Data:", formData);
-    };
+  return (
+    <div className='w-full h-screen bg-[#141414] flex justify-center items-center'>
+      <div className='py-3 px-4 rounded-lg bg-[#313030] flex flex-col  gap-y-4 items-center justify-center' >
+        
+        {/* //Headder */}
 
-    return (
-      <section className="bg-[#141414] w-full">
-        <div className="h-screen flex justify-center items-center">
-          <CardWrapper
-            label="Login to your Account"
-            title="Login"
-            backButtonHref="/Register"
-            backButtonlabel="Don't have an account? Register here."
-          >
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full space-y-6"
-              >
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input type="text" placeholder="jhonedoe@gmail.com" {...field} />
-                      </FormControl>
-                    </FormItem> 
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>password</FormLabel>
-                      <FormControl>
-                        <Input type="password" placeholder="* * * * * * *" {...field} />
-                      </FormControl>
-                    </FormItem> 
-                  )}
-                />
-                <Button type="submit" className="w-full bg-[#FF0000]">Submit</Button>
-              </form>
-            </Form>
-          </CardWrapper>
-        </div>
-      </section>
-    );
-  };
+         <div className='flex flex-col w-full gap-y-2 items-center justify-center'>
+              <div className='flex gap-x-2 items-center justify-center'>
+                  <FaYoutube className="text-[#FF0000] text-[34px] " />
+                  <h1 className='text-3xl font-oswald text-white font-semibold'>Login</h1>
+              </div>
+              <p className='text-muted-foreground text-white text-sm'>Login your account</p>
+            </div>
 
-  return <InputForm />;
+          <div className="flex items-center flex-col gap-3 justify-center w-full">
+              <div className="flex flex-col w-[300px] mx-auto">
+                <label className="text-sm lg:text-base text-white mb-1">Email</label>
+                  <Input 
+                      type="email" 
+                      placeholder=" Jhonedoe@gmail.com "
+                      value={loginData.email}
+                      onChange={(e) => handleOnChng(e,"email")}
+                  />
+              </div>
+              <div className="flex flex-col w-[300px] mx-auto">
+                <label className="text-sm lg:text-base text-white mb-1">Password</label>
+                  <Input 
+                      type="password" 
+                      placeholder="* * * * * *"
+                      value={loginData.password}
+                      onChange={(e) => handleOnChng(e,"password")}
+                  />
+              </div>           
+          </div>
+
+          <Button onClick={hndlLogIn} className="w-full my-4 bg-[#FF0000]">Submit</Button>
+            <Button variant="link" className="font-normal text-white w-full" size="sm" asChild>
+              <Link to='/register'>
+                don't have an account? register here.
+              </Link>
+            </Button>
+      </div>
+      <ToastContainer />
+    </div>
+  );
 };
 
 export default Login;

@@ -15,6 +15,7 @@ import { IoIosMusicalNotes } from "react-icons/io";
 import { SiYoutubegaming } from "react-icons/si";
 import { GoTrophy } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const SideBar = ({sideNavBar}) => {
   return (
@@ -23,10 +24,12 @@ const SideBar = ({sideNavBar}) => {
            
            {/* home*/}
            <div className="flex flex-col border-b-[1px] gap-[2px]  border-[#353535] pb-[10px]">
+                 <Link to={'/'}>
                  <div className="flex gap-5  items-center py-2 px-4 rounded-md hover:bg-[#2e2d2d] cursor-pointer">
-                 <SlHome className="text-lg"/>
-                 <div className="font-semibold text-sm">Home</div>
+                     <SlHome className="text-lg"/>
+                     <div className="font-semibold text-sm">Home</div>
                  </div>
+                 </Link>
                  <div className="flex gap-5  items-center py-2 px-4 rounded-md hover:bg-[#2e2d2d] cursor-pointer">
                  <SiYoutubeshorts className="text-lg" /> 
                  <div className="font-semibold text-sm">Shorts</div>
@@ -137,9 +140,7 @@ const SideBar = ({sideNavBar}) => {
                  <div className="flex gap-5  items-center py-2 px-4 rounded-md hover:bg-[#2e2d2d] cursor-pointer">
                     <div className="font-semibold ">Help</div>
                  </div>
-                 <div className="flex gap-5  items-center py-2 px-4 rounded-md hover:bg-[#2e2d2d] cursor-pointer">
-                    <div className="font-semibold ">Feedback</div>
-                 </div>
+                 
            </div>
         </div>
         :<div className="flex flex-col box-border h-[93vh]  fixed top-[55px] left-0 p-[14px] text-white bg-[#141414] w-[80px] transition-width duration-300" >

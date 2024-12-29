@@ -10,17 +10,18 @@ const cookieOpt = {
 
 exports.signUp = async(req,res)=>{
     try {
-        const{ channelName, userName, about, profilePic, password }= req.body;
-        const isExist = await User.findOne({ userName });   //checking if the username already exists or not
-
+        const{ channelName, userName, email, profilePic, password } = req.body;
+        const isExist = await User.findOne({ email, userName });   //checking if the username already exists or not
+        
         if(isExist){
             res.status(400).json({ 
-                error: "username already exist, please try different username"
+                error: "Already exists an account with this email"
             })
         }else{
             let encryptPass = await bcrypt.hash(password, 10);
-            const user = new User({channelName, userName, about, profilePic, password:encryptPass });
+            const user = new User({channelName, userName, email, profilePic, password:encryptPass });
             await user.save();
+            console.log(user);
             res.status(201).json({
                  message:"Regisered successfully", success:"OK", data:user
             })
@@ -35,14 +36,14 @@ exports.signUp = async(req,res)=>{
 
 exports.signIn = async (req,res)=>{
     try{
-        const { userName, password } = req.body;
-        const user = await User.findOne({ userName });        //checking if the username already exists or not
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });        //checking if the username already exists or not
 
         if(user && await bcrypt.compare(password, user.password)){
 
             const token = JWT.sign( {userId: user._id }, 'Secret_Key');
             res.cookie('token',token, cookieOpt);                                          //saving the token key in cookie
-            res.json({ message:'Logged in Successfully', success:"true", token});
+            res.json({ message:'Logged in Successfully', success:"true", token, user});
         }else{
             res.status(400).json({ error: 'invalid Credetials'});
         }

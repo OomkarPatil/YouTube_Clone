@@ -7,12 +7,12 @@ const InteractiveHoverButton = React.forwardRef(({ text = "Upload", className, .
     (<button
       ref={ref}
       className={cn(
-        "group relative w-32 cursor-pointer overflow-hidden rounded-full border bg-background p-2 text-center font-semibold",
+        "group relative w-32 cursor-pointer  overflow-hidden rounded-full border bg-[#4a4848] p-2 text-center font-semibold",
         className
       )}
       {...props}>
       <span
-        className="inline-block translate-x-1 transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0">
+        className="inline-flex translate-x-1 transition-all text-[#4a4848] duration-300 group-hover:translate-x-12 group-hover:opacity-0">
         {text}
       </span>
       <div

@@ -71,5 +71,5 @@ export default {
   		}
   	}
   },
-  plugins: [tailwindScrollbar, lineClamp, tailwindcssAnimate], // Ensure both plugins are properly imported and added
+  plugins: [tailwindScrollbar, tailwindcssAnimate], // Ensure both plugins are properly imported and added
 };

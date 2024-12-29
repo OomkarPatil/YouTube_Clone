@@ -6,6 +6,8 @@ const Auth = require('../Middleware/Authentication.js');
 router.post('/video', Auth, VidCtrl.UpldVid);
 router.get('/allVid', VidCtrl.GetAllVid);
 router.get('/vidbyid/:id',VidCtrl.GetVidByID);
-router.get('/:userId/channel', VidCtrl.GetAllVideoByUserID);
+
+
+router.get('/:userId/channel', VidCtrl.GetMEDIAByUserID);      //get all media by user id
 
 module.exports = router;
